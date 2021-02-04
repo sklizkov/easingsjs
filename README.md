@@ -14,7 +14,7 @@ npm i easing-fns --save
 import { linear } from 'easing-fns'
 
 // or
-const easings = require('easing-fns')
+import * as easings from 'easing-fns'
 const { linear } = easings
 ```
 
