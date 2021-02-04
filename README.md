@@ -4,8 +4,16 @@ Easing Functions 🚀
 
 ## Installation
 
+### NPM
+
 ```bash
 npm i easing-fns --save
+```
+
+### CDN
+
+```html
+<script src="https://unpkg.com/easing-fns@latest/dist/easing-fns.js"></script>
 ```
 
 ## Usage
