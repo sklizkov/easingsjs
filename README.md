@@ -13,7 +13,7 @@ npm i easing-fns --save
 ### CDN
 
 ```html
-<script src="https://unpkg.com/easing-fns@latest/dist/easing-fns.js"></script>
+<script src="https://unpkg.com/easing-fns@latest"></script>
 ```
 
 ## Usage
@@ -24,6 +24,12 @@ import { linear } from 'easing-fns'
 // or
 import * as easings from 'easing-fns'
 const { linear } = easings
+```
+
+```html
+<script>
+  const linear = easingFns.linear
+</script>
 ```
 
 ## Example
