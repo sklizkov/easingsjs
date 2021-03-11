@@ -1,6 +1,6 @@
 {
   "name": "easing-fns",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Easing Functions",
   "main": "dist/easing-fns.cjs.js",
   "unpkg": "dist/easing-fns.js",
