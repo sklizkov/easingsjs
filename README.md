@@ -58,37 +58,7 @@ function animate(easing, draw, duration) {
 
 ## Functions
 
-- backIn
-- backOut
-- backInOut
-- bounceIn
-- bounceOut
-- bounceInOut
-- circIn
-- circOut
-- circInOut
-- cubicIn
-- cubicOut
-- cubicInOut
-- elasticIn
-- elasticOut
-- elasticInOut
-- expoIn
-- expoOut
-- expoInOut
-- quadIn
-- quadOut
-- quadInOut
-- quarticIn
-- quarticOut
-- quarticInOut
-- qinticIn
-- qinticOut
-- qinticInOut
-- sineIn
-- sineOut
-- sineInOut
-- linear
+![preview](https://raw.githubusercontent.com/sklizkov/easing-fns/main/preview.svg)
 
 ## License
 
