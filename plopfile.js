@@ -12,12 +12,12 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: 'src/{{name}}.ts',
-        templateFile: 'plop-templates/easing.ts'
+        path: 'src/{{name}}.js',
+        templateFile: 'plop-templates/easing.js'
       },
       {
         type: 'modify',
-        path: 'src/index.ts',
+        path: 'src/index.js',
         pattern: /(\/\/ easings)/g,
         template: '$1\nexport { {{ name }} } from \'./{{ name }}\''
       },
