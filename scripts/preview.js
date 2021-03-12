@@ -1,32 +1,54 @@
 const
-  fs = require('fs'),
+  fs           = require('fs'),
   { optimize } = require('svgo'),
-  easings = require('../dist/easing-fns.cjs.js')
+  easings      = require('../dist/easing-fns.cjs.js')
 
 
 const
-  width = 140 * 6 + 10 * 6,
-  height = 160 * 6 + 10 * 6
+  length  = 6,
+  padding = length * 10,
+  width   = length * 140 + padding,
+  height  = length * 160 + padding
+
+const
+  colors = ['#833ab4', '#fd1d1d', '#fcb045']
 
 const content = `<?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 ${ width } ${ height }" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg
+  viewBox="0 0 ${ width } ${ height }" 
+  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+>
   <defs>
-    <linearGradient id="gradient">
-      <stop offset="0%" stop-color="#7b67ff"></stop>
-      <stop offset="100%" stop-color="#ee8afe" stop-opacity="1"></stop>
+    <linearGradient id="g">
+      ${ colors.map((color, k) => `<stop offset="${ 100 / (colors.length - 1) * k }%" stop-color="${ color }"></stop>`).join('') }
     </linearGradient>
   </defs>
+
   ${ Object.keys(easings).filter(n => n !== 'linear').concat(['linear']).map((name, i) => {
     const
       x = 150 * i - (Math.floor(i / 6) * width),
       y = 170 * Math.floor(i / 6)
 
     return `<g>
-      <!--<rect x="${ x }" y="${ y }" width="140" height="160" rx="15" fill="#f9f9f9" stroke="#f1f1f1" />-->
-      <text x="${ x + 70 }" y="${ y + 17 }" text-anchor="middle" fill="#7b67ff" font-size="1em" font-weight="bold" font-family="monospace">${ name }</text>
-
-      <rect x="${ x + 10 }" y="${ y + 30 }" width="120" height="120" rx="10" fill="rgba(0, 0, 0, .03)" stroke="rgba(0, 0, 0, .08)" />
-      <path fill="transparent" stroke="url(#gradient)" stroke-width="4" d="${ createEasing(easings[name], 20 + x, 40 + y) }" stroke-linecap="round"></path>
+      <rect 
+        x="${ x + 10 }" y="${ y + 30 }" 
+        width="120" height="120" 
+        rx="10" 
+        fill="rgba(131, 59, 181, 0.03)" stroke="rgba(131, 59, 181, 0.08)"
+      />
+      
+      <path 
+        fill="transparent" stroke="url(#g)"
+        d="${ createEasing(easings[name], 20 + x, 40 + y) }" 
+        stroke-linecap="round" stroke-width="4"
+      ></path>
+      
+      <text 
+        x="${ x + 70 }" y="${ y + 17 }" 
+        text-anchor="middle" 
+        fill="${ colors[0] }" 
+        font-size="1em" font-weight="bold" font-family="monospace"
+      >${ name }</text>
     </g>`
   }).join('') }
 </svg>`
