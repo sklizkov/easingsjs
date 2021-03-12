@@ -20,12 +20,6 @@ module.exports = function (plop) {
         path: 'src/index.js',
         pattern: /(\/\/ easings)/g,
         template: '$1\nexport { {{ name }} } from \'./{{ name }}\''
-      },
-      {
-        type: 'modify',
-        path: 'README.md',
-        pattern: /(## Functions)\n/g,
-        template: '$1\n\n- {{ name }}',
       }
     ]
   })
