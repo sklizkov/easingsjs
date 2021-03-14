@@ -13,13 +13,13 @@ module.exports = function (plop) {
       {
         type: 'add',
         path: 'src/{{name}}.js',
-        templateFile: 'plop-templates/easing.js'
+        templateFile: 'plop-templates/easing'
       },
       {
         type: 'modify',
         path: 'src/index.js',
         pattern: /(\/\/ easings)/g,
-        template: '$1\nexport { {{ name }} } from \'./{{ name }}\''
+        template: '$1\nexport { {{ name }}In, {{ name }}Out, {{ name }}InOut } from \'./{{ name }}\''
       }
     ]
   })

@@ -59,26 +59,13 @@ fs.writeFile('preview.svg', optimize(content).data, err => {
 
 
 function createEasing(easing, offsetX = 0, offsetY = 0) {
-  const
-    scaleDown = .01,
-    scaleUp = 100,
-    points = [],
-    from = 0,
-    to = scaleUp
-
-  for (let i = from; i <= to; i++) {
+  return new Array(101).fill('').map((_, i) => {
     const
-      x = round(Math.abs(i)) + offsetX,
-      y = round(scaleUp * (1 - easing(Math.abs(i) * scaleDown))) + offsetY
+      x = offsetX + round(Math.abs(i)),
+      y = offsetY + round(100 * (1 - easing(Math.abs(i) * .01)))
 
-    if (i === from) {
-      points.push(`M${x} ${y} L`)
-    } else {
-      points.push(` ${x} ${y}`)
-    }
-  }
-
-  return points.join('')
+    return i ? ` ${x} ${y}` : `M${x} ${y} L`
+  }).join('')
 }
 
 function round (n) {

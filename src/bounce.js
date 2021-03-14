@@ -1,4 +1,7 @@
-export function bounceOut(t) {
+import { easeOut, easeInOut } from './helpers'
+
+
+const bounce = t => {
   const
     a = 4 / 11,
     b = 8 / 11,
@@ -24,3 +27,8 @@ export function bounceOut(t) {
     }
   }
 }
+
+
+export const bounceIn = easeOut(bounce)
+export const bounceOut = bounce
+export const bounceInOut = easeInOut(bounceIn)
