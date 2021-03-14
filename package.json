@@ -7,15 +7,15 @@
   "module": "dist/easing-fns.module.js",
   "scripts": {
     "new": "plop",
-    "build": "rollup -c",
+    "build": "rollup -c && npm run preview",
     "dev": "rollup -cw",
-    "preview": "npm run build && node ./scripts/preview.js",
+    "preview": "node ./scripts/preview.js",
     "lint": "eslint --ext js src; exit 0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run preview"
+      "pre-commit": "npm run lint"
     }
   },
   "repository": {
