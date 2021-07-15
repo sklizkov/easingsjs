@@ -1,25 +1,27 @@
 module.exports = function (plop) {
   plop.setGenerator('easing', {
     description: 'Create a new easing',
+
     prompts: [
       {
-        type: 'input',
-        name: 'name',
-        message: 'What is your easing name?',
-        validate: isNotEmpty('name'),
+        type     : 'input',
+        name     : 'name',
+        message  : 'What is your easing name?',
+        validate : isNotEmpty('name'),
       }
     ],
+
     actions: [
       {
-        type: 'add',
-        path: 'src/{{name}}.js',
-        templateFile: 'plop-templates/easing'
+        type         : 'add',
+        path         : 'src/{{name}}.js',
+        templateFile : 'plop-templates/easing'
       },
       {
-        type: 'modify',
-        path: 'src/index.js',
-        pattern: /(\/\/ easings)/g,
-        template: '$1\nexport { {{ name }}In, {{ name }}Out, {{ name }}InOut } from \'./{{ name }}\''
+        type     : 'modify',
+        path     : 'src/index.js',
+        pattern  : /(\/\/ easings)/g,
+        template : '$1\nexport { {{ name }}In, {{ name }}Out, {{ name }}InOut, {{ name }}OutIn } from \'./{{ name }}\''
       }
     ]
   })

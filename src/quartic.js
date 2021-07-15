@@ -1,11 +1,12 @@
-import { easeOut, easeInOut } from './helpers'
+import { easeIn, easeOut, easeInOut, easeOutIn } from './helpers'
 
 
 const quartic = t => {
-  return Math.pow(t, 4)
+  return t * t * t * t
 }
 
 
-export const quarticIn = quartic
-export const quarticOut = easeOut(quartic)
+export const quarticIn    = easeIn(quartic)
+export const quarticOut   = easeOut(quartic)
 export const quarticInOut = easeInOut(quartic)
+export const quarticOutIn = easeOutIn(quartic)

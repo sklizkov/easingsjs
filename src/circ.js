@@ -1,4 +1,4 @@
-import { easeOut, easeInOut } from './helpers'
+import { easeIn, easeOut, easeInOut, easeOutIn } from './helpers'
 
 
 const circ = t => {
@@ -6,6 +6,7 @@ const circ = t => {
 }
 
 
-export const circIn = circ
-export const circOut = easeOut(circ)
+export const circIn    = easeIn(circ)
+export const circOut   = easeOut(circ)
 export const circInOut = easeInOut(circ)
+export const circOutIn = easeOutIn(circ)

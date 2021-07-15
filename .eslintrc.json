@@ -13,8 +13,20 @@
     "quotes": ["error", "single"],
     "no-var": "error",
     "indent": ["error", 2],
-    "no-multi-spaces": "error",
-    "no-console": "error"
+    "no-multi-spaces": ["error", {
+      "ignoreEOLComments": true,
+      "exceptions": {
+        "VariableDeclarator": true
+      }
+    }],
+    "no-console": "error",
+    "key-spacing": ["error", {
+      "align": {
+        "beforeColon": true,
+        "afterColon": true,
+        "on": "colon"
+      }
+    }]
   },
   "ignorePatterns": ["dist/**/*.*", "plop-templates/**/*.*", "scripts/**/*.*"]
 }

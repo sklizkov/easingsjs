@@ -1,4 +1,4 @@
-import { easeOut, easeInOut } from './helpers'
+import { easeIn, easeOut, easeInOut, easeOutIn } from './helpers'
 
 
 const sine = t => {
@@ -8,6 +8,7 @@ const sine = t => {
 }
 
 
-export const sineIn = sine
-export const sineOut = easeOut(sine)
+export const sineIn    = easeIn(sine)
+export const sineOut   = easeOut(sine)
 export const sineInOut = easeInOut(sine)
+export const sineOutIn = easeOutIn(sine)

@@ -59,7 +59,3 @@ function animate(easing, draw, duration) {
 ## Functions
 
 ![preview](https://raw.githubusercontent.com/sklizkov/easing-fns/main/preview.svg)
-
----
-
-Inspired by [mattdesl/eases](https://github.com/mattdesl/eases)  

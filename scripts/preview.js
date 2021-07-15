@@ -4,66 +4,83 @@ import * as easings from '../dist/easing-fns.module.js'
 
 
 const
-  length  = 6,
-  padding = length * 10,
-  width   = length * 140 + padding,
-  height  = length * 160 + padding
+  rowLength  = 4,
+  marginSize = 20,
+  itemSize   = 180,
+  fontSize   = 16,
 
-const
-  colors = ['#833ab4', '#fd1d1d', '#fcb045']
+  width      = (itemSize + marginSize) * rowLength,
+  height     = Math.ceil(Object.keys(easings).length / rowLength) * (itemSize + marginSize + fontSize),
 
-const content = `<?xml version="1.0" encoding="UTF-8"?>
+  colors     = ['#833ab4', '#fd1d1d', '#fcb045']
+
+
+const contentString = `<?xml version="1.0" encoding="UTF-8"?>
 <svg
-  viewBox="0 0 ${ width } ${ height }" 
-  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 ${ width } ${ height }"
+  xmlns="http://www.w3.org/2000/svg"
 >
+
   <defs>
     <linearGradient id="g">
-      ${ colors.map((color, k) => `<stop offset="${ 100 / (colors.length - 1) * k }%" stop-color="${ color }"></stop>`).join('') }
+      ${ colors.map((color, k) => {
+        return `<stop offset="${ 100 / (colors.length - 1) * k }%" stop-color="${ color }" />`
+      }).join('') }
     </linearGradient>
   </defs>
 
   ${ Object.keys(easings).filter(n => n !== 'linear').concat(['linear']).map((name, i) => {
     const
-      x = 150 * i - (Math.floor(i / 6) * width),
-      y = 170 * Math.floor(i / 6)
+      s = (itemSize + marginSize),
+      r = Math.floor(i / rowLength),
+      x = marginSize / 2 + s * i - r * s * rowLength,
+      y = marginSize / 2 + fontSize + r * (s + fontSize),
+      o = (itemSize / 2 - itemSize / 150 * 100 / 2)
 
     return `<g>
+
       <rect 
-        x="${ x + 10 }" y="${ y + 30 }" 
-        width="120" height="120" 
+        x="${ x }" y="${ y }" 
+        width="${ itemSize }" height="${ itemSize }" 
         rx="10" 
         fill="rgba(131, 59, 181, 0.03)" stroke="rgba(131, 59, 181, 0.08)"
       />
-      
+
       <path 
         fill="transparent" stroke="url(#g)"
-        d="${ createEasing(easings[name], 20 + x, 40 + y) }" 
-        stroke-linecap="round" stroke-width="4"
-      ></path>
-      
+        d="${ createEasing(
+          easings[name],
+          x + o,
+          y + o,
+          itemSize / 150 // scale
+        ) }"
+        stroke-linecap="round" stroke-width="${ itemSize / 150 * 5 }"
+      />
+
       <text 
-        x="${ x + 70 }" y="${ y + 17 }" 
+        x="${ x + itemSize / 2 }" y="${ y - fontSize / 2 }" 
         text-anchor="middle" 
         fill="${ colors[0] }" 
-        font-size="1em" font-weight="bold" font-family="monospace"
+        font-size="${ fontSize }px" font-weight="bold" font-family="monospace"
       >${ name }</text>
+
     </g>`
   }).join('') }
-</svg>`
 
-fs.writeFile('preview.svg', optimize(content).data, err => {
+</svg>
+`
+
+fs.writeFile('preview.svg', optimize(contentString).data, err => {
   if (err) return console.log(err)
 })
 
-
-function createEasing(easing, offsetX = 0, offsetY = 0) {
+function createEasing(easing, offsetX = 0, offsetY = 0, scale = 1) {
   return new Array(101).fill('').map((_, i) => {
     const
-      x = offsetX + round(Math.abs(i)),
-      y = offsetY + round(100 * (1 - easing(Math.abs(i) * .01)))
+      x = offsetX + round(Math.abs(i)) * scale,
+      y = offsetY + round(100 * (1 - easing(Math.abs(i) * .01))) * scale
 
-    return i ? ` ${x} ${y}` : `M${x} ${y} L`
+    return i ? ` ${ x } ${ y }` : `M${ x } ${ y } L`
   }).join('')
 }
 
